@@ -1,2 +1,2 @@
 # Full Stack Development 
- This is coderepository for all code
+ This is code repository for all code

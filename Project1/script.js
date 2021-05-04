@@ -25,34 +25,43 @@ function showSuccess(input) {
     formControl.className = 'form-control success';
 }
 
+// Function to Validate Email
+
+function isValidateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 // Event Listener
 // Create Event Listener for Submit Button
 form.addEventListener('submit', function (e) {
     // Stop page from reloading on submit
     e.preventDefault();
-    //  Check username input is empty
+
+    // Check to see if fields meet required field requirement
+    // Check username input is empty
     if (username.value === '') {
         showError(username, 'Username is required');
     } else {
         showSuccess(username);
     }
-
-
-    //  Check email input is empty
+    // Check email input is empty
     if (email.value === '') {
         showError(email, 'Email is required');
-    } else {
+    }
+    else if (!isValidateEmail(email.value)) {
+        showError(email, 'Email is not valid');
+    }
+    else {
         showSuccess(email);
     }
-
-
-    //  Check password input is empty
+    // Check password input is empty
     if (password.value === '') {
         showError(password, 'Password is required');
     } else {
         showSuccess(password);
     }
-    //  Check user input is empty
+    // Check user input is empty
     if (password2.value === '') {
         showError(password2, 'Confirm Password is required');
     } else {

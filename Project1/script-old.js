@@ -25,25 +25,6 @@ function showSuccess(input) {
     formControl.className = 'form-control success';
 }
 
-// Function to check if require fields have data
-
-function checkRequired(inputArray) {
-
-    inputArray.forEach(function (input) {
-        if (input.value === '') {
-            showError(input, `${getFieldId(input)} is required`);
-        } else {
-            showSuccess(input);
-        }
-    });
-}
-
-// Get the id of input field with proper Uppercase
-
-function getFieldId(input) {
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
 // Function to Validate Email
 
 function isValidateEmail(email) {
@@ -57,6 +38,33 @@ form.addEventListener('submit', function (e) {
     // Stop page from reloading on submit
     e.preventDefault();
 
-    checkRequired([username, email, password, password2])
-
+    // Check to see if fields meet required field requirement
+    // Check username input is empty
+    if (username.value === '') {
+        showError(username, 'Username is required');
+    } else {
+        showSuccess(username);
+    }
+    // Check email input is empty
+    if (email.value === '') {
+        showError(email, 'Email is required');
+    }
+    else if (!isValidateEmail(email.value)) {
+        showError(email, 'Email is not valid');
+    }
+    else {
+        showSuccess(email);
+    }
+    // Check password input is empty
+    if (password.value === '') {
+        showError(password, 'Password is required');
+    } else {
+        showSuccess(password);
+    }
+    // Check user input is empty
+    if (password2.value === '') {
+        showError(password2, 'Confirm Password is required');
+    } else {
+        showSuccess(password2);
+    }
 });

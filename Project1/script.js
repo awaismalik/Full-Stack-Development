@@ -39,24 +39,47 @@ function checkRequired(inputArray) {
 }
 
 // Get the id of input field with proper Uppercase
-
 function getFieldId(input) {
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
-// Function to Validate Email
+// Function check length for input field
+function checkLength(input, min, max) {
+    if (input.value.length < min) {
+        showError(input, `${getFieldId(input)} need to be at least ${min} characters`);
+    } else if (input.value.length > max) {
+        showError(input, `${getFieldId / (input)} need to be less then ${max} characters `);
+    } else {
+        showSuccess(input);
+    }
 
-function isValidateEmail(email) {
+}
+// Function to check if password and confirm password match
+
+function checkPasswordMatch(input1, input2) {
+    if (input1.value !== input2.value) {
+        showError(input2, "Passwords don't match");
+    }
+}
+
+
+// Function to Validate Email
+function checkEmail(input) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    if (re.test(input.value.trim())) {
+        showSuccess(input);
+    } else {
+        showError(input, ` Please Provide a valid Email `);
+    }
 }
 
 // Event Listener
 // Create Event Listener for Submit Button
 form.addEventListener('submit', function (e) {
-    // Stop page from reloading on submit
     e.preventDefault();
-
-    checkRequired([username, email, password, password2])
-
+    checkRequired([username, email, password, password2]);
+    checkLength(username, 3, 10);
+    checkLength(password, 6, 30);
+    checkEmail(email);
+    checkPasswordMatch(password, password2);
 });

@@ -18,7 +18,10 @@ body{
     min-height: 100vh;
     margin: 0;
 }
-
+nav ul li{
+    list-style-type: none;
+    list-style: none;
+}
 .container{
     background-color: white;
     border-radius: 5px;

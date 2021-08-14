@@ -5,8 +5,12 @@ function getJokes(e) {
     // Get Number of jokes
     const number = document.querySelector('input[type="number"]').value;
 
+
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+
+    // Use Custom Name instead of Chuck Norris
+    // xhr.open('GET', `http://api.icndb.com/jokes/random/${number}?firstName=John&lastName=Smith`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
